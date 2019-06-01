@@ -1,0 +1,10 @@
+1.pytorch yolo可训练和预测版   地址 https://github.com/ultralytics/yolov3
+前期需求：
+# pip3 install -U -r requirements.txt
+# conda install numpy opencv matplotlib tqdm pillow && conda install pytorch torchvision -c pytorch
+numpy
+opencv-python
+torch >= 1.0.0
+matplotlib
+pycocotools
+tqdm
