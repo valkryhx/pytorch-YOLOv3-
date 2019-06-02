@@ -1,0 +1,34 @@
+参照 https://blog.csdn.net/sinat_27634939/article/details/89884011
+自己遇到的一些坑 记录如下
+
+
+train.py 86 88行  注意
+parse_config 29 30行 encoding=utf-8  注意用sublime text save as utf-8  。win下有编码问题。。。
+
+每次在makeTxt.py 中修改了train val的比例时  要把 data\test.shapes删掉 因为比例变了！！注意。
+
+======训练过程
+0   要把 data\test.shapes删掉
+1   python makeTxt.py
+2    python voc_label.py
+3   把  cfg\hxyolov3-tiny.cfg  改成traing模式  注释test
+python train.py --data-cfg dataset2\rbc.data --cfg cfg\hxyolov3-tiny.cfg --epochs 40
+4   如果训练中断了 python train.py --data data/coco.data --cfg cfg/yolov3.cfg --resume
+
+======测试
+0 把  cfg\hxyolov3-tiny.cfg  改成traing模式  注释test
+1    python detect.py --data-cfg dataset2\rbc.data --cfg cfg\hxyolov3-tiny.cfg --weights weights\best.pt
+
+======查看结果
+在makeTxt.py同一层新建 drawLog.py
+
+内容
+from utils import utils
+
+utils.plot_results()
+print('result drawing is done!')
+
+调用 python drawLog.py
+查看模型训练的各个指标
+
+output文件夹目标检测的结果 自家看看 一张一张的 多跑 200epochs至少 要不然图上经常识别不出任何东西。没有标记。就像没处理一样。
